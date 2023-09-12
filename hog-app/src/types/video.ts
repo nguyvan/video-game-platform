@@ -1,0 +1,4 @@
+export enum typeVideo {
+    PRINCIPAL_VIDEO = "PRINCIPAL_VIDEO",
+    SUGGESTED_VIDEO = "SUGGESTED_VIDEO",
+}

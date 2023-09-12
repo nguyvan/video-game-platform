@@ -1,0 +1,53 @@
+@import url("https://fonts.googleapis.com/css2?family=Alumni+Sans+Collegiate+One&display=swap");
+
+.hightlight-post-container {
+    display: flex;
+    width: 100%;
+    padding-top: 15vh;
+    height: 50%;
+    justify-content: space-around;
+    align-items: center;
+    object-fit: fill;
+    margin-bottom: 50px;
+    #logo-text {
+        font-family: "Alumni Sans Collegiate One";
+        font-style: normal;
+        font-weight: 400;
+        font-size: 150px;
+
+        color: #ffffff;
+        margin: 0;
+        padding: 0;
+        transform: translate(0, -25%);
+    }
+
+    .responsive-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: flex-start;
+        .image-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 40vw;
+            .icon-container {
+                display: flex;
+                margin-top: 1vh;
+                width: 40%;
+                align-items: flex-end;
+                justify-content: space-between;
+            }
+        }
+        .post-title-container {
+            display: flex;
+            color: white;
+            margin-left: 2vw;
+            justify-content: flex-start;
+            align-items: flex-start;
+            flex-direction: column;
+            width: 30vw;
+        }
+    }
+}

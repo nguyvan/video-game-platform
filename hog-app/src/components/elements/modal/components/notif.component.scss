@@ -1,0 +1,80 @@
+.notif-container {
+    position: relative;
+    z-index: 1000;
+    height: auto;
+    padding: 0.625rem 1rem;
+    border: transparent;
+    color: white;
+    box-shadow:
+        0 3px 6px rgba(0, 0, 0, 0.16),
+        0 3px 6px rgba(0, 0, 0, 0.23);
+
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 90%;
+    cursor: pointer;
+
+    .notif-header-container {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        .notif-header-content {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            margin-bottom: 5px;
+            width: 100%;
+            .image-avatar {
+                display: flex;
+                height: 40px;
+                width: 40px;
+                border-radius: 50%;
+                border-collapse: separate;
+                margin-right: 5px;
+                overflow: hidden;
+                perspective: 1px;
+            }
+            .image-no-avatar {
+                display: flex;
+                height: 40px;
+                width: 40px;
+                border-radius: 50%;
+                margin-right: 5px;
+                perspective: 1px;
+                background-color: white;
+                align-items: center;
+                justify-content: center;
+                color: black;
+                font-weight: 700;
+            }
+            .title {
+                font-size: 16px;
+                font-family: "Inter";
+                font-style: normal;
+                font-weight: 400;
+                color: #ffffff;
+                max-width: 200px;
+                text-overflow: ellipsis;
+                overflow: hidden;
+                white-space: nowrap;
+            }
+        }
+        .time {
+            font-size: 16px;
+            font-family: "Inter";
+            font-style: normal;
+            font-weight: 400;
+            color: #000000;
+            align-self: flex-end;
+        }
+        .time-click {
+            font-size: 16px;
+            font-family: "Inter";
+            font-style: normal;
+            font-weight: 400;
+            color: #ffffff;
+            align-self: flex-end;
+        }
+    }
+}

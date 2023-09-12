@@ -1,0 +1,30 @@
+FROM node:16 AS builder
+
+WORKDIR /usr/src/app-frontend
+
+ARG USERNAME=hog
+ARG UID=1000
+ARG GID=1000
+
+RUN groupadd -g ${GID} -o ${USERNAME}
+RUN useradd -m -u ${UID} -g ${GID} -o -s /bin/bash ${USERNAME}
+RUN chown ${UID}:${GID} .
+RUN chown ${USERNAME} .
+
+USER ${USERNAME}
+
+COPY package*.json ./
+
+RUN npm ci --env=dev
+
+COPY --chown=${USERNAME} . .
+
+RUN npm run build
+
+FROM nginx:latest
+
+EXPOSE 3000
+
+COPY ./nginx/default.conf /etc/nginx/conf.d/default.conf
+
+COPY --chown=1000 --from=builder /usr/src/app-frontend/build /usr/share/nginx/html

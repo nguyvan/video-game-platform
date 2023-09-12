@@ -1,0 +1,27 @@
+.button-container {
+    display: flex;
+    flex-direction: row;
+    position: absolute;
+    right: 5%;
+    top: 10px;
+}
+
+.login-title {
+    position: absolute;
+    display: flex;
+    align-self: center;
+    bottom: 10px;
+    left: 50%;
+    transform: translate(-50%, 0);
+
+    font-family: Inter;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 20px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+
+    color: #ffffff;
+}

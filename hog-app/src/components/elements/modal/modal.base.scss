@@ -1,0 +1,26 @@
+.modal-base-container {
+    display: flex;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    bottom: auto;
+    min-height: 100%;
+    z-index: 2;
+    .modal-base-outline {
+        display: flex;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 2;
+    }
+    .modal-base-content {
+        display: flex;
+        position: absolute;
+        top: 50px;
+        right: 10px;
+        max-height: 50%;
+        z-index: 2;
+    }
+}

@@ -1,0 +1,15 @@
+.suggest-post-box {
+    display: flex;
+    width: calc((100% - 100px) / 4);
+    flex: 0 0 calc((100% - 100px) / 4);
+    flex-direction: column;
+    .icon-container {
+        display: flex;
+        align-self: center;
+        margin-top: 10px;
+        width: 60%;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 10px;
+    }
+}

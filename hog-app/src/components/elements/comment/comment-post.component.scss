@@ -1,0 +1,38 @@
+.comment-post-container {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    width: 100%;
+    .user-position {
+        display: flex;
+        margin: 5px;
+    }
+    .place-comment {
+        display: flex;
+        width: 100%;
+        position: relative;
+        .comment-post-content {
+            display: flex;
+            border-radius: 5px;
+            resize: none;
+            box-sizing: border-box;
+            width: 100%;
+            border: 0;
+            padding: 20px;
+            outline: none;
+            background: rgba(101, 38, 109, 0.38);
+            color: #ffffff;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            font-size: 16px;
+            padding-right: 40px;
+        }
+        .icon-send-comment {
+            display: flex;
+            position: absolute;
+            cursor: pointer;
+            bottom: 40px;
+            right: 20px;
+        }
+    }
+}

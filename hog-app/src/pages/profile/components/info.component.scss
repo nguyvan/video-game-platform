@@ -1,0 +1,83 @@
+.profile-content {
+    display: flex;
+    flex-direction: column;
+    max-width: 600px;
+    .header-container {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        margin-bottom: 20px;
+        cursor: pointer;
+        .image-avatar {
+            display: flex;
+            height: 80px;
+            width: 80px;
+            border-radius: 50%;
+            border-collapse: separate;
+            margin-right: 5px;
+            overflow: hidden;
+            perspective: 1px;
+        }
+        .image-no-avatar {
+            display: flex;
+            height: 80px;
+            width: 80px;
+            border-radius: 50%;
+            margin-right: 5px;
+            perspective: 1px;
+            background-color: white;
+            align-items: center;
+            justify-content: center;
+            color: black;
+            font-weight: 700;
+            span {
+                font-size: 48px;
+            }
+        }
+        .rate-content {
+            display: flex;
+            flex-direction: column;
+            margin-left: 10px;
+            .comment-name {
+                font-size: 36px;
+                font-family: "Inter";
+                font-style: normal;
+                font-weight: 400;
+                color: #ffffff;
+            }
+            .editable-content {
+                display: flex;
+                flex-direction: row;
+                .star-container {
+                    display: flex;
+                    flex-direction: row;
+                    margin-right: 20px;
+                    .star-item {
+                        display: flex;
+                        margin-right: 20px;
+                    }
+                }
+            }
+        }
+    }
+    .bio-content {
+        background: rgba(255, 0, 0, 0.1);
+        box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+        border-radius: 10px;
+        padding: 20px;
+        font-family: "ABeeZee";
+        font-style: normal;
+        font-weight: 400;
+        font-size: 24px;
+        color: #ffffff;
+        white-space: pre-line;
+        margin-bottom: 20px;
+    }
+    .display-number-container {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        justify-content: space-around;
+        align-items: center;
+    }
+}

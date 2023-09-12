@@ -1,0 +1,108 @@
+version: "3"
+services:
+    backend:
+        container_name: backend
+        build:
+            context: ./hog-api-ts
+            dockerfile: dockerfile
+            args:
+                UID: ${UID:-1000}
+                GID: ${GID:-1000}
+        env_file:
+            - ./hog-api-ts/.env
+        ports:
+            - 5000:5000
+        depends_on:
+            - mongodb
+            - redis
+            - s3
+        expose:
+            - 5000
+        volumes:
+            - /hog-api-ts:/app-backend
+
+    frontend:
+        container_name: frontend
+        build:
+            context: ./hog-app
+            dockerfile: dockerfile
+            args:
+                UID: ${UID:-1000}
+                GID: ${GID:-1000}
+        stdin_open: true
+        environment:
+            - CHOKIDAR_USEPOLLING=true
+        ports:
+            - 3000:3000
+        expose:
+            - 3000
+        volumes:
+            - /hog-app:/app-frontend
+            - /hog-app/build:/app-frontend/build
+
+    nginx:
+        depends_on:
+            - backend
+            - frontend
+        restart: always
+        build:
+            context: ./nginx
+            dockerfile: dockerfile
+        ports:
+            - 80:80
+
+    mongodb:
+        image: mongo
+        ports:
+            - "27017:27017"
+        environment:
+            MONGO_INITDB_ROOT_USERNAME: hog
+            MONGO_INITDB_ROOT_PASSWORD: Hog123
+            MONGO_INITDB_DATABASE: hog
+        volumes:
+            - mongodb-data:/var/lib/mongo
+            - ./init-mongo.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+
+    adminer:
+        image: dockette/adminer
+        ports:
+            - 8000:80
+
+    s3:
+        image: minio/minio
+        ports:
+            - 9000:9000
+            - 9001:9001
+        volumes:
+            - s3-data:/data
+        environment:
+            MINIO_ACCESS_KEY: cduLa9RZkcjOVlO2P46dlQ
+            MINIO_SECRET_KEY: 5qpIXFuMMw6n5c4qziKFNHOoG1D9WuEQ
+        command: minio server --console-address ":9001" /data
+
+    createbuckets:
+        image: minio/mc
+        depends_on:
+            - s3
+        entrypoint: >
+            /bin/sh -c "
+            /usr/bin/mc config host add s3 http://s3:9000 cduLa9RZkcjOVlO2P46dlQ 5qpIXFuMMw6n5c4qziKFNHOoG1D9WuEQ;
+            /usr/bin/mc mb s3/hog;
+            /usr/bin/mc policy download s3/hog;
+            exit 0;
+            "
+
+    redis:
+        image: redis/redis-stack
+        ports:
+            - 6379:6379
+            - 8001:8001
+        environment:
+            - REDIS_ARGS=--save 1200 32 --requirepass Hog123
+        volumes:
+            - redis-data:/data
+
+volumes:
+    mongodb-data: {}
+    s3-data: {}
+    redis-data: {}
