@@ -1,7 +1,7 @@
 version: "3"
 services:
     backend:
-        container_name: backend
+        container_name: backend-hog
         build:
             context: ./hog-api-ts
             dockerfile: dockerfile
