@@ -53,7 +53,7 @@ export const InfoProfile = ({ user }: { user: UserI }) => {
                 <div className='rate-content'>
                     <div className='comment-name'>{user.username}</div>
                     <div className='editable-content'>
-                        <div className='star-container'>
+                        {/* <div className='star-container'>
                             {[...Array(5)].map((value, index) => {
                                 const color =
                                     index <= 3 ? "#FFE03E" : "#D9D9D9";
@@ -67,7 +67,7 @@ export const InfoProfile = ({ user }: { user: UserI }) => {
                                     </div>
                                 );
                             })}
-                        </div>
+                        </div> */}
                         {isEditable() ? (
                             <Button
                                 title='Edit'

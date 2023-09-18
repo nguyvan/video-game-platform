@@ -28,7 +28,7 @@ export const HomePage = () => {
                     title="s'inscrire"
                 />
             </div>
-            <span className='login-title'>FOR GAMERS BY GAMERS</span>
+            <span className='login-title'>FOR GAMERS</span>
         </BackgroundComponent>
     );
 };
