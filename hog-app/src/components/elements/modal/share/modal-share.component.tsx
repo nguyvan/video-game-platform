@@ -65,6 +65,15 @@ export const ModalShare = () => {
         }
     };
 
+    const handleScroll = (event: React.UIEvent<HTMLDivElement>) => {
+        const target = event.target as HTMLElement;
+        const isNearBottom =
+            target.scrollTop + target.clientHeight >= target.scrollHeight;
+        if (isNearBottom) {
+            setSkip((skip) => skip + 1);
+        }
+    };
+
     React.useEffect(() => {
         if (ref.current) {
             const element: HTMLDivElement = ref.current;
@@ -73,11 +82,15 @@ export const ModalShare = () => {
                 element.removeEventListener("scroll", trackScrolling);
             };
         }
-    }, []);
+    }, [ref.current]);
 
     React.useEffect(() => {
         (async () => {
-            const response = await getUsers(skip, search ? search : undefined);
+            const response = await getUsers(
+                skip,
+                search ? search : undefined,
+                false
+            );
             setUsers((users) => {
                 if (users.length) {
                     if (skip) {
@@ -122,7 +135,11 @@ export const ModalShare = () => {
                         <SVGSearch width={24} height={24} />
                     </div>
                 </div>
-                <div className='list-user-container' ref={ref}>
+                <div
+                    className='list-user-container'
+                    ref={ref}
+                    onScroll={handleScroll}
+                >
                     {users.map((user) => (
                         <div className='user-item' key={user._id}>
                             <UserDisplay

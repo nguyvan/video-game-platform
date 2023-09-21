@@ -15,7 +15,7 @@
         right: 30%;
         left: 30%;
         max-height: 50%;
-        z-index: 1;
+        z-index: 9999;
     }
 
     .container {
@@ -49,6 +49,8 @@
             .content-header {
                 display: flex;
                 flex-direction: row;
+                justify-content: space-between;
+                width: calc(100% - 100px);
             }
         }
     }

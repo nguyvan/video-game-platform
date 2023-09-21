@@ -23,7 +23,10 @@ export class SocketService implements SocketServiceI {
 
 	constructor(@inject(INJECTION_TYPE.SERVER) httpServer: http.Server) {
 		this.io_ = new Server(httpServer, {
-			cors: {},
+			cors: {
+				methods: ["GET", "POST"],
+				credentials: true,
+			},
 			allowEIO3: true,
 			transports: ["websocket", "polling"],
 		});

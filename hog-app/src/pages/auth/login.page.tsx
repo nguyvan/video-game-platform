@@ -61,7 +61,9 @@ export const LoginPage = () => {
                     </div>
                 )}
                 renderFooter={() => (
-                    <div style={style.footerContainer}>
+                    <div
+                        style={{ ...style.footerContainer, marginBottom: 100 }}
+                    >
                         <Button
                             title='login'
                             onClick={handleLogin}

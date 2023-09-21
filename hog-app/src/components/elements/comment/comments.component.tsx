@@ -30,6 +30,15 @@ export const Comments = ({ idPost }: CommentsI) => {
         }
     };
 
+    const handleScroll = (event: React.UIEvent<HTMLDivElement>) => {
+        const target = event.target as HTMLElement;
+        const isNearBottom =
+            target.scrollTop + target.clientHeight >= target.scrollHeight;
+        if (isNearBottom) {
+            setSkip((skip) => skip + 1);
+        }
+    };
+
     React.useEffect(() => {
         socket?.connect();
         socket?.receiveComment(receiveComment);
@@ -76,7 +85,11 @@ export const Comments = ({ idPost }: CommentsI) => {
     return (
         <div className='comment-container'>
             {comments.length ? (
-                <div className='comment-content' ref={ref}>
+                <div
+                    className='comment-content'
+                    ref={ref}
+                    onScroll={handleScroll}
+                >
                     {comments?.map((comment) => (
                         <Comment
                             comment={comment}

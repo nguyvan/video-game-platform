@@ -21,12 +21,23 @@ import {
 import { typeModal } from "../../../types/modal";
 import { ModalBase } from "../modal/modal.base";
 import { CreatePost } from "./components/create-post.component";
+import { UserReturnI } from "../../../api/new-feed/getUser";
+import { getUsers } from "../../../api/actions/getUsers";
+import { UserDisplay } from "../user-display/user-display.component";
 
 const Navbar = () => {
     const ref = React.useRef<HTMLUListElement>(null);
     const [isOpen, setIsOpen] = React.useState<boolean>(false);
     const [isOpenCreatePost, setIsOpenCreatePost] =
         React.useState<boolean>(false);
+
+    const [users, setUsers] = React.useState<UserReturnI[]>([]);
+    const [skip, setSkip] = React.useState<number>(0);
+    const [search, setSearch] = React.useState<string>("");
+
+    const handleChangeText = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setSearch(event.target.value);
+    };
 
     const handleToggleCreatePost = () => {
         setIsOpenCreatePost((isOpenCreatePost) => !isOpenCreatePost);
@@ -45,6 +56,15 @@ const Navbar = () => {
     const handleCloseModal = () => {
         if (modalNotif.isOpen) {
             dispatch(closeModal());
+        }
+    };
+
+    const handleScroll = (event: React.UIEvent<HTMLDivElement>) => {
+        const target = event.target as HTMLElement;
+        const isNearBottom =
+            target.scrollTop + target.clientHeight >= target.scrollHeight;
+        if (isNearBottom) {
+            setSkip((skip) => skip + 1);
         }
     };
 
@@ -130,6 +150,31 @@ const Navbar = () => {
     }, [handleResize, isOpen]);
 
     React.useEffect(() => {
+        (async () => {
+            const response = await getUsers(skip, search, true);
+            setUsers((users) => {
+                if (users.length) {
+                    if (skip) {
+                        return [...users, ...response];
+                    } else {
+                        return users;
+                    }
+                } else {
+                    return response;
+                }
+            });
+        })();
+    }, [skip]);
+
+    React.useEffect(() => {
+        setSkip(0);
+        (async () => {
+            const response = await getUsers(0, search, true);
+            setUsers(response);
+        })();
+    }, [search]);
+
+    React.useEffect(() => {
         updateNbNotif();
     }, []);
 
@@ -147,8 +192,26 @@ const Navbar = () => {
             <div className='search-bar'>
                 <div className='search-content'>
                     <SVGSearch className='svg-search' />
-                    <input type='text' placeholder='SEARCH'></input>
+                    <input
+                        type='text'
+                        placeholder='SEARCH'
+                        value={search}
+                        onChange={handleChangeText}
+                    />
                 </div>
+                {search && users.length ? (
+                    <div className='user-content' onScroll={handleScroll}>
+                        {users.map((user) => (
+                            <UserDisplay
+                                user={user}
+                                clickable={true}
+                                withMargin={true}
+                            />
+                        ))}
+                    </div>
+                ) : (
+                    <></>
+                )}
             </div>
             <ul ref={ref}>
                 {buttons.map((value, index) => (

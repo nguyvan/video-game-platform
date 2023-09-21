@@ -2,7 +2,8 @@
 .profile-content {
     display: flex;
     flex-direction: column;
-    max-width: 600px;
+    width: 34%;
+    height: 35%;
     .header-container {
         display: flex;
         flex-direction: row;
@@ -37,14 +38,16 @@
         }
         .rate-content {
             display: flex;
-            flex-direction: column;
+            flex-direction: row;
             margin-left: 10px;
+            align-items: center;
             .comment-name {
-                font-size: 36px;
+                font-size: 24px;
                 font-family: "ABeeZee";
                 font-style: normal;
                 font-weight: 400;
                 color: #ffffff;
+                margin-right: 100px;
             }
             .editable-content {
                 display: flex;
@@ -57,6 +60,12 @@
                         display: flex;
                         margin-right: 20px;
                     }
+                }
+                .button-edit {
+                    height: auto;
+                    width: auto;
+                    padding-left: 30px;
+                    padding-right: 30px;
                 }
             }
         }

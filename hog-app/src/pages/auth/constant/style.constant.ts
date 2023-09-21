@@ -4,14 +4,16 @@ export const style = {
     headerContainer: {
         display: "flex",
         alignSelf: "center",
-        width: "30%",
+        width: "100%",
         alignItems: "center",
         justifyContent: "center",
-        marginBottom: 50,
+        marginBottom: 30,
     } as CSSProperties,
     headerImage: {
         display: "flex",
-        width: "50%",
+        width: "40%",
+        marginTop: 30,
+        aspectRatio: "7.2 / 1",
     } as CSSProperties,
 
     contentContainer: {
@@ -19,8 +21,10 @@ export const style = {
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        width: "100%",
+        width: "90%",
         marginBottom: 40,
+        alignSelf: "center",
+        marginTop: 40,
     } as CSSProperties,
 
     footerContainer: {
@@ -28,9 +32,9 @@ export const style = {
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "space-between",
-        width: "90%",
+        width: "81%",
         alignSelf: "center",
-        marginBottom: 50,
+        marginBottom: 150,
     } as CSSProperties,
 
     footerButton: {

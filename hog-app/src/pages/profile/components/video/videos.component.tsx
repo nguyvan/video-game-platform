@@ -11,6 +11,15 @@ interface VideosI {
 export const Videos = ({ posts, setSkip }: VideosI) => {
     const ref = React.useRef<HTMLDivElement>(null);
 
+    const handleScroll = (event: React.UIEvent<HTMLDivElement>) => {
+        const target = event.target as HTMLElement;
+        const isNearBottom =
+            target.scrollTop + target.clientHeight >= target.scrollHeight;
+        if (isNearBottom) {
+            setSkip((skip) => skip + 1);
+        }
+    };
+
     const trackScrolling = () => {
         if (ref.current) {
             const { scrollTop, scrollHeight, clientHeight } = ref.current;
@@ -31,7 +40,7 @@ export const Videos = ({ posts, setSkip }: VideosI) => {
         }
     }, []);
     return (
-        <div className='videos-container' ref={ref}>
+        <div className='videos-container' ref={ref} onScroll={handleScroll}>
             {posts.map((post) => (
                 <VideoComponent
                     urlPoster={post.urlImage}

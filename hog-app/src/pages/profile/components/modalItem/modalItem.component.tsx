@@ -76,27 +76,27 @@ export const ModalItem = ({ handleClose }: { handleClose: () => void }) => {
                     accept='image/*'
                 />
                 <Button
-                    title='edit'
+                    title='Edit'
                     onClick={handleClickChange}
                     className='button'
                 />
             </div>
             <input
                 type='text'
-                placeholder='username'
+                placeholder='Username'
                 value={username}
                 onChange={handleChangeUsername}
                 className='input-username'
             />
             <textarea
-                placeholder='bio'
+                placeholder='Bio'
                 rows={10}
                 value={bio}
                 onChange={handleChangeBio}
                 className='input-bio'
             />
             <Button
-                title='validate'
+                title='Validate'
                 onClick={handleValidate}
                 className='button-validate'
             />

@@ -21,6 +21,14 @@ export const Notifs = () => {
         }
     };
 
+    const handleScroll = (event: React.UIEvent<HTMLDivElement>) => {
+        const target = event.target as HTMLElement;
+        const isNearBottom =
+            target.scrollTop + target.clientHeight >= target.scrollHeight;
+        if (isNearBottom) {
+            setSkip((skip) => skip + 1);
+        }
+    };
     React.useEffect(() => {
         if (ref.current) {
             const element: HTMLDivElement = ref.current;
@@ -64,7 +72,7 @@ export const Notifs = () => {
 
     return notifs.length ? (
         <div className='notifs-container'>
-            <div className='notifs-content' ref={ref}>
+            <div className='notifs-content' ref={ref} onScroll={handleScroll}>
                 <span className='title'>Notifications</span>
                 {notifs.map((notif) => (
                     <NotifItem notif={notif} key={notif._id} />

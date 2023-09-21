@@ -51,13 +51,6 @@ export const SuggestedVideo = ({ post }: { post: PostI }) => {
 
     const buttons = [
         {
-            onClick: () => {
-                return;
-            },
-            icon: <SVGCommentChat color={"white"} width={36} height={36} />,
-            nbAction: post.nbComments,
-        },
-        {
             onClick: async () => {
                 handleLikes();
                 await likePost(post._id);
@@ -70,6 +63,13 @@ export const SuggestedVideo = ({ post }: { post: PostI }) => {
                 />
             ),
             nbAction: nbLikes ?? 0,
+        },
+        {
+            onClick: () => {
+                return;
+            },
+            icon: <SVGCommentChat color={"white"} width={32} height={32} />,
+            nbAction: post.nbComments,
         },
         {
             onClick: () => {

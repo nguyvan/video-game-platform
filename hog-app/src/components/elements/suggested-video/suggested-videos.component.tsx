@@ -19,6 +19,15 @@ export const SuggestedVideos = () => {
         }
     };
 
+    const handleScroll = (event: React.UIEvent<HTMLDivElement>) => {
+        const target = event.target as HTMLElement;
+        const isNearBottom =
+            target.scrollTop + target.clientHeight >= target.scrollHeight;
+        if (isNearBottom) {
+            setSkip((skip) => skip + 1);
+        }
+    };
+
     React.useEffect(() => {
         if (ref.current) {
             document.addEventListener("scroll", trackScrolling);
@@ -46,7 +55,11 @@ export const SuggestedVideos = () => {
     }
 
     return (
-        <div className='suggest-post-container' ref={ref}>
+        <div
+            className='suggest-post-container'
+            ref={ref}
+            onScroll={handleScroll}
+        >
             {posts.map((post) => (
                 <SuggestedVideo post={post} key={post._id} />
             ))}

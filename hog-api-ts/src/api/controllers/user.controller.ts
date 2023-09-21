@@ -14,9 +14,10 @@ export class UserController {
 	static async getUsers(req: Request, res: Response, next: NextFunction) {
 		try {
 			const { id } = req.user!;
-			const { skip, search } = req.query as unknown as {
+			const { skip, search, withSearch } = req.query as unknown as {
 				skip: number;
 				search?: string;
+				withSearch?: string;
 			};
 			const database = req.db!;
 			const userRepository = new UserRepository(database);
@@ -28,6 +29,9 @@ export class UserController {
 					id,
 				});
 				return res.status(StatusCodes.OK).json({ users });
+			}
+			if (withSearch === "true") {
+				return res.status(StatusCodes.OK).json({ users: [] });
 			}
 			const users = await userRepository.getOtherUsers({ id, skip });
 			return res.status(StatusCodes.OK).json({ users });

@@ -1,4 +1,4 @@
-import { SVGStar } from "../../../assets/svg/SVGStar.image";
+// import { SVGStar } from "../../../assets/svg/SVGStar.image";
 import { Button } from "../../../components/elements/button/button.component";
 import { UserI } from "../../../storage/features/userSlice";
 import "./info.component.scss";
@@ -72,6 +72,7 @@ export const InfoProfile = ({ user }: { user: UserI }) => {
                             <Button
                                 title='Edit'
                                 onClick={handleOpenModalEdit}
+                                className='button-edit'
                                 style={{ backgroundColor: "#462C53" }}
                             />
                         ) : (

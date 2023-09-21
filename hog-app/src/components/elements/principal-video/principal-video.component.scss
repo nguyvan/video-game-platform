@@ -2,6 +2,7 @@
 
 .hightlight-post-container {
     display: flex;
+    position: relative;
     width: 100%;
     padding-top: 15vh;
     height: 50%;
@@ -10,6 +11,10 @@
     object-fit: fill;
     margin-bottom: 50px;
     #logo-text {
+        display: flex;
+        position: absolute;
+        top: 300px;
+        left: 10%;
         font-family: "Alumni Sans Collegiate One";
         font-style: normal;
         font-weight: 400;
@@ -23,6 +28,7 @@
 
     .responsive-container {
         display: flex;
+        margin-left: 20%;
         flex-direction: row;
         justify-content: flex-start;
         align-items: flex-start;

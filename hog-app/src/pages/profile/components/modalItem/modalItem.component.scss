@@ -4,6 +4,10 @@
     width: 100%;
     padding: 20px;
     z-index: 3;
+    background-color: #2b1ec6;
+    border-radius: 20px;
+    overflow: hidden;
+
     .modal-item-content {
         display: flex;
         flex-direction: row;
@@ -35,10 +39,15 @@
             font-weight: 700;
         }
         .button {
-            height: 30%;
             align-self: center;
             margin-left: 20px;
-            background-color: rgba(101, 38, 109, 0.38);
+            align-items: center;
+            justify-content: center;
+            width: 9.3%;
+            height: 9.2%;
+            background-color: #4121a4;
+            border-width: 0;
+            box-shadow: none;
         }
     }
     .input-username {
@@ -71,5 +80,7 @@
     .button-validate {
         align-self: center;
         background-color: rgba(101, 38, 109, 0.38);
+        box-shadow: none;
+        border: 0;
     }
 }

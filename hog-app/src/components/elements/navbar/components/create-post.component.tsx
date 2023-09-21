@@ -96,7 +96,7 @@ export const CreatePost = ({ handleClose }: CreatePostI) => {
                 value={content}
                 onChange={handleChangeContent}
                 className='content'
-                placeholder='enter your content'
+                placeholder='Enter your content'
             />
             <input
                 className='createpost-input-media'
