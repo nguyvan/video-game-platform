@@ -15,6 +15,7 @@ export const configurationApp = () => {
 	const app: Application = express();
 	app.use(
 		cors({
+			origin: "http://192.168.1.72",
 			credentials: true,
 			methods: [
 				"POST",
