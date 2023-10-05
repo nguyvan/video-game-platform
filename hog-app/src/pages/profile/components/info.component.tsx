@@ -5,28 +5,42 @@ import "./info.component.scss";
 import { useAppDispatch, useAppSelector } from "../../../storage/storage";
 import { DisplayNumber } from "./display-number.component";
 import { openModalEdit } from "../../../storage/features/modalEditSlice";
-
-const displayInfo = [
-    {
-        title: "members",
-        nb: 12453,
-    },
-    {
-        title: "videos",
-        nb: 32,
-    },
-    {
-        title: "follow",
-        nb: 15,
-    },
-];
+import { Logout } from "../../../api/actions/logout";
+import { useNavigate } from "react-router-dom";
+import { Auth } from "../../../lib/auth";
+import { getNumberPost } from "../../../api/actions/getNumberPost";
+import React from "react";
 
 export const InfoProfile = ({ user }: { user: UserI }) => {
     const mainUser = useAppSelector((selector) => selector.user.user) as UserI;
     const dispatch = useAppDispatch();
+    const navigate = useNavigate();
+
+    const [displayInfo, setDisplayInfo] = React.useState<
+        { title: string; nb?: number }[]
+    >([
+        {
+            title: "members",
+            nb: undefined,
+        },
+        {
+            title: "videos",
+            nb: undefined,
+        },
+        {
+            title: "follow",
+            nb: undefined,
+        },
+    ]);
 
     const handleOpenModalEdit = () => {
         dispatch(openModalEdit());
+    };
+
+    const handleLogout = async () => {
+        await Logout();
+        Auth.removeAuthData();
+        navigate("/");
     };
 
     const isEditable = () => {
@@ -35,6 +49,26 @@ export const InfoProfile = ({ user }: { user: UserI }) => {
         }
         return false;
     };
+
+    React.useEffect(() => {
+        (async () => {
+            const nbPost = await getNumberPost(user._id);
+            const nbMembers = 12456;
+            const nbFollow = 15;
+            setDisplayInfo((displayInfo) =>
+                displayInfo.map((value) => {
+                    if (value.title === "videos") {
+                        value.nb = nbPost;
+                    } else if (value.title === "members") {
+                        value.nb = nbMembers;
+                    } else if (value.title === "follow") {
+                        value.nb = nbFollow;
+                    }
+                    return value;
+                })
+            );
+        })();
+    }, [user._id]);
     return (
         <div className='profile-content'>
             <div
@@ -73,6 +107,19 @@ export const InfoProfile = ({ user }: { user: UserI }) => {
                                 title='Edit'
                                 onClick={handleOpenModalEdit}
                                 className='button-edit'
+                                style={{
+                                    backgroundColor: "#462C53",
+                                    marginRight: 10,
+                                }}
+                            />
+                        ) : (
+                            <></>
+                        )}
+                        {isEditable() ? (
+                            <Button
+                                title='Logout'
+                                onClick={handleLogout}
+                                className='button-edit'
                                 style={{ backgroundColor: "#462C53" }}
                             />
                         ) : (
@@ -87,13 +134,17 @@ export const InfoProfile = ({ user }: { user: UserI }) => {
                 <></>
             )}
             <div className='display-number-container'>
-                {displayInfo.map((value, index) => (
-                    <DisplayNumber
-                        title={value.title}
-                        nb={value.nb}
-                        key={index}
-                    />
-                ))}
+                {displayInfo.map((value, index) =>
+                    value.nb ? (
+                        <DisplayNumber
+                            title={value.title}
+                            nb={value.nb}
+                            key={index}
+                        />
+                    ) : (
+                        <div key={index}></div>
+                    )
+                )}
             </div>
         </div>
     );

@@ -1,55 +1,55 @@
 version: "3"
 services:
-    backend:
-        container_name: backend-hog
-        build:
-            context: ./hog-api-ts
-            dockerfile: dockerfile
-            args:
-                UID: ${UID:-1000}
-                GID: ${GID:-1000}
-        env_file:
-            - ./hog-api-ts/.env
-        ports:
-            - 5000:5000
-        depends_on:
-            - mongodb
-            - redis
-            - s3
-        expose:
-            - 5000
-        volumes:
-            - /hog-api-ts:/app-backend
+    # backend:
+    #     container_name: backend-hog
+    #     build:
+    #         context: ./hog-api-ts
+    #         dockerfile: dockerfile
+    #         args:
+    #             UID: ${UID:-1000}
+    #             GID: ${GID:-1000}
+    #     env_file:
+    #         - ./hog-api-ts/.env
+    #     ports:
+    #         - 5000:5000
+    #     depends_on:
+    #         - mongodb
+    #         - redis
+    #         - s3
+    #     expose:
+    #         - 5000
+    #     volumes:
+    #         - /hog-api-ts:/app-backend
 
-    frontend:
-        container_name: frontend
-        build:
-            context: ./hog-app
-            dockerfile: dockerfile
-            args:
-                UID: ${UID:-1000}
-                GID: ${GID:-1000}
-        stdin_open: true
-        environment:
-            - CHOKIDAR_USEPOLLING=true
-        ports:
-            - 3000:3000
-        expose:
-            - 3000
-        volumes:
-            - /hog-app:/app-frontend
-            - /hog-app/build:/app-frontend/build
+    # frontend:
+    #     container_name: frontend
+    #     build:
+    #         context: ./hog-app
+    #         dockerfile: dockerfile
+    #         args:
+    #             UID: ${UID:-1000}
+    #             GID: ${GID:-1000}
+    #     stdin_open: true
+    #     environment:
+    #         - CHOKIDAR_USEPOLLING=true
+    #     ports:
+    #         - 3000:3000
+    #     expose:
+    #         - 3000
+    #     volumes:
+    #         - /hog-app:/app-frontend
+    #         - /hog-app/build:/app-frontend/build
 
-    nginx:
-        depends_on:
-            - backend
-            - frontend
-        restart: always
-        build:
-            context: ./nginx
-            dockerfile: dockerfile
-        ports:
-            - 80:80
+    # nginx:
+    #     depends_on:
+    #         - backend
+    #         - frontend
+    #     restart: always
+    #     build:
+    #         context: ./nginx
+    #         dockerfile: dockerfile
+    #     ports:
+    #         - 80:80
 
     mongodb:
         image: mongo
