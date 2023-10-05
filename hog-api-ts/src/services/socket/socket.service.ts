@@ -24,7 +24,8 @@ export class SocketService implements SocketServiceI {
 	constructor(@inject(INJECTION_TYPE.SERVER) httpServer: http.Server) {
 		this.io_ = new Server(httpServer, {
 			cors: {
-				origin: "*",
+				//TO BE MODIFIED
+				origin: "http://localhost:3000",
 				methods: ["GET", "POST"],
 				credentials: true,
 			},

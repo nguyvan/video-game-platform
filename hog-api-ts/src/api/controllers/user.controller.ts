@@ -456,4 +456,21 @@ export class UserController {
 			next(err);
 		}
 	}
+
+	static async getNumberPost(
+		req: Request,
+		res: Response,
+		next: NextFunction
+	) {
+		try {
+			const database = req.db!;
+			const { id } = req.user!;
+			const { idUser } = req.query as unknown as { idUser?: string };
+			const postRepository = new PostRepository(database);
+			const nbPost = await postRepository.count(idUser ?? id);
+			return res.status(StatusCodes.OK).json({ nbPost });
+		} catch (err) {
+			next(err);
+		}
+	}
 }

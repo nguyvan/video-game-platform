@@ -1,6 +1,5 @@
 import express, { Router } from "express";
 import { AuthController } from "@/api/controllers/auth.controller";
-import { authMiddleware } from "../middlewares/auth.middleware";
 
 export class AuthRoute {
 	static router: Router = express.Router();

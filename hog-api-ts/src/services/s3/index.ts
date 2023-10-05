@@ -45,7 +45,8 @@ export class S3Service {
 					Key: key,
 				});
 				const url = await getSignedUrl(this.s3, command);
-				return url.replace("s3:9000", "192.168.1.72/s3");
+				// return url.replace("s3:9000", "192.168.1.72/s3");
+				return url;
 			}
 			return;
 		} catch {

@@ -544,4 +544,29 @@ export class PostRepository {
 			});
 		}
 	}
+
+	async count(idUser: string): Promise<number> {
+		try {
+			const postModel = this.database.get<PostI>("post");
+			return await postModel
+				.aggregate([
+					{
+						$match: {
+							id_user: new mongoose.Types.ObjectId(idUser),
+						},
+					},
+					{
+						$count: "count",
+					},
+				])
+				.then((value) => value.at(0).count as number);
+		} catch (err) {
+			throw new DatabaseError({
+				name: databaseError.RETRIEVE_ERROR,
+				message: `cannot get number post of user ${idUser}`,
+				details: `cannot get number post of user ${idUser}`,
+				origin: this.count.name,
+			});
+		}
+	}
 }

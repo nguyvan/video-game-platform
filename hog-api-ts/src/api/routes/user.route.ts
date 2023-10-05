@@ -62,5 +62,11 @@ export class UserRoute {
 		);
 
 		this.router.post("/share", authMiddleware, UserController.sharePost);
+
+		this.router.get(
+			"/number/post",
+			authMiddleware,
+			UserController.getNumberPost
+		);
 	}
 }

@@ -1,6 +1,9 @@
 import dotenv from "dotenv";
+import path from "path";
 
-dotenv.config();
+dotenv.config({
+	path: path.resolve(__dirname, "../../.dev.env"),
+});
 
 export const S3_CONFIG = {
 	S3_ACCESS_KEY: process.env.S3_ACCESS_KEY as string,
